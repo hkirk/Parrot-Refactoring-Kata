@@ -9,12 +9,17 @@ namespace Parrot
         private readonly ParrotTypeEnum _type;
         private readonly double _voltage;
 
-        public Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        private Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
             _type = type;
             _numberOfCoconuts = numberOfCoconuts;
             _voltage = voltage;
             _isNailed = isNailed;
+        }
+
+        public static Parrot CreateParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
+        {
+            return new Parrot(type, numberOfCoconuts, voltage, isNailed);
         }
 
         public double GetSpeed()
