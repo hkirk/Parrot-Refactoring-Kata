@@ -19,12 +19,7 @@ namespace Parrot
         }
 
         public abstract double GetSpeed();
-
-        protected double GetBaseSpeed(double voltage)
-        {
-            return Math.Min(24.0, voltage * GetBaseSpeed());
-        }
-
+        
         protected double GetLoadFactor()
         {
             return 9.0;
@@ -62,6 +57,11 @@ namespace Parrot
         {
             _isNailed = isNailed;
             _voltage = voltage;
+        }
+
+        privateved  double GetBaseSpeed(double voltage)
+        {
+            return Math.Min(24.0, voltage * GetBaseSpeed());
         }
 
         public override double GetSpeed() => _isNailed ? 0 : GetBaseSpeed(_voltage);
