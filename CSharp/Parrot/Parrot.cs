@@ -20,11 +20,6 @@ namespace Parrot
 
         public abstract double GetSpeed();
         
-        protected double GetLoadFactor()
-        {
-            return 9.0;
-        }
-
         protected double GetBaseSpeed()
         {
             return 12.0;
@@ -45,6 +40,11 @@ namespace Parrot
             _numberOfCoconuts = numberOfCoconuts;
         }
 
+        private double GetLoadFactor()
+        {
+            return 9.0;
+        }
+
         public override double GetSpeed() => Math.Max(0, GetBaseSpeed() - GetLoadFactor() * _numberOfCoconuts);
     }
 
@@ -59,7 +59,7 @@ namespace Parrot
             _voltage = voltage;
         }
 
-        privateved  double GetBaseSpeed(double voltage)
+        private  double GetBaseSpeed(double voltage)
         {
             return Math.Min(24.0, voltage * GetBaseSpeed());
         }
