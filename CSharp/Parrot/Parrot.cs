@@ -4,15 +4,13 @@ namespace Parrot
 {
     public abstract class Parrot
     {
-        protected readonly bool _isNailed;
         protected readonly int _numberOfCoconuts;
         protected readonly double _voltage;
 
-        public Parrot(int numberOfCoconuts, double voltage, bool isNailed)
+        public Parrot(int numberOfCoconuts, double voltage)
         {
             _numberOfCoconuts = numberOfCoconuts;
             _voltage = voltage;
-            _isNailed = isNailed;
         }
 
         public static Parrot CreateParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
@@ -49,7 +47,7 @@ namespace Parrot
 
     public class EuropeanParrot : Parrot
     {
-        public EuropeanParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed) : base(numberOfCoconuts, voltage, isNailed)
+        public EuropeanParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed) : base(numberOfCoconuts, voltage)
         {
         }
 
@@ -58,7 +56,7 @@ namespace Parrot
 
     public class AfricanParrot : Parrot
     {
-        public AfricanParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed) : base(numberOfCoconuts, voltage, isNailed)
+        public AfricanParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed) : base(numberOfCoconuts, voltage)
         {
         }
 
@@ -67,9 +65,11 @@ namespace Parrot
 
     public class NorwegianBlueParrot : Parrot
     {
-        public NorwegianBlueParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed) : base(numberOfCoconuts, voltage, isNailed)
+        protected readonly bool _isNailed;
+
+        public NorwegianBlueParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed) : base(numberOfCoconuts, voltage)
         {
-            
+            _isNailed = isNailed;
         }
 
         public override double GetSpeed() => _isNailed ? 0 : GetBaseSpeed(_voltage);
