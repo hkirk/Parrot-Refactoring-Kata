@@ -4,23 +4,16 @@ namespace Parrot
 {
     public abstract class Parrot
     {
-        protected readonly int _numberOfCoconuts;
-
-        public Parrot(int numberOfCoconuts)
-        {
-            _numberOfCoconuts = numberOfCoconuts;
-        }
-
         public static Parrot CreateParrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, bool isNailed)
         {
             switch (type)
             {
                 case ParrotTypeEnum.EUROPEAN:
-                    return new EuropeanParrot(numberOfCoconuts);
+                    return new EuropeanParrot();
                 case ParrotTypeEnum.AFRICAN:
                     return new AfricanParrot(numberOfCoconuts);
                 case ParrotTypeEnum.NORWEGIAN_BLUE:
-                    return new NorwegianBlueParrot(numberOfCoconuts, voltage, isNailed);
+                    return new NorwegianBlueParrot(voltage, isNailed);
             }
             throw new Exception("Should be unreachable");
         }
@@ -45,17 +38,16 @@ namespace Parrot
 
     public class EuropeanParrot : Parrot
     {
-        public EuropeanParrot(int numberOfCoconuts) : base(numberOfCoconuts)
-        {
-        }
-
         public override double GetSpeed() => GetBaseSpeed();
     }
 
     public class AfricanParrot : Parrot
     {
-        public AfricanParrot(int numberOfCoconuts) : base(numberOfCoconuts)
+        private readonly int _numberOfCoconuts;
+
+        public AfricanParrot(int numberOfCoconuts)
         {
+            _numberOfCoconuts = numberOfCoconuts;
         }
 
         public override double GetSpeed() => Math.Max(0, GetBaseSpeed() - GetLoadFactor() * _numberOfCoconuts);
@@ -64,9 +56,9 @@ namespace Parrot
     public class NorwegianBlueParrot : Parrot
     {
         private readonly bool _isNailed;
-        protected readonly double _voltage;
+        private readonly double _voltage;
 
-        public NorwegianBlueParrot(int numberOfCoconuts, double voltage, bool isNailed) : base(numberOfCoconuts)
+        public NorwegianBlueParrot(double voltage, bool isNailed)
         {
             _isNailed = isNailed;
             _voltage = voltage;
